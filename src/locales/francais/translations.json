@@ -1,0 +1,7 @@
+{
+  "Loading.First": "Chargement des widgets",
+  "Loading.Second": "Le widget est toujours en cours de chargement",
+  "Loading.Third": "Le chargement prend plus de temps que d'habitude. Attendez s'il vous plaît",
+  "Error.Timeout": "Erreur lors du chargement. Veuillez actualiser la fenêtre",
+  "Success.LoadingFinished": "Le widget est chargé!"
+}

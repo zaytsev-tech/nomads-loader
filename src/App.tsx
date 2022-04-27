@@ -1,13 +1,9 @@
-import React, { FC, useState } from "react";
-import ClipLoader from "react-spinners/ClipLoader";
-import styled from "styled-components";
-import { SomeConvenientWidget } from "./components/SomeConvenientWidget";
+import React, { FC } from "react";
+import { SomeConvenientWidget } from "./components/some-convenient-widget";
 
 import "./App.css";
 
 const App: FC = () => {
-  const [loading, setLoading] = useState(true);
-
   return (
     <div className="App">
       <SomeConvenientWidget />

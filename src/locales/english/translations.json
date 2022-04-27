@@ -1,0 +1,7 @@
+{
+  "Loading.First": "Widget loading",
+  "Loading.Second": "Widget still loading",
+  "Loading.Third": "Loading takes longer than usual. Wait, please",
+  "Error.Timeout": "Error while loading. Please refresh the window",
+  "Success.LoadingFinished": "Widget is loaded!"
+}

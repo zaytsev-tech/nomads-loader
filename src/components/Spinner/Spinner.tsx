@@ -21,6 +21,7 @@ export const Spinner: FC<SpinnerProps> = ({ loading }) => {
 
 const SpinnerContainer = styled.div`
   display: flex;
+  justify-content: center;
 `;
 
 const StyledClipLoader = styled(ClipLoader)``;

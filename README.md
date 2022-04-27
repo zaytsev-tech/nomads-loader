@@ -1,3 +1,9 @@
+Stack: React, TypeScript, i18next, styled-components
+
+You will find basic information about the i18n translation principle in some-convenient-widget.tsx
+
+SetTimeouts modulate data loading fetch statuses.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
