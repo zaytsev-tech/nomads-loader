@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
 import i18n from "../../utils/i18n";
-import { Spinner } from "../spinner";
+import { LoadingTranslator } from "../../utils/loadingTranslator";
+import { Spinner } from "../UIComponents/Spinner";
 
 const messages: Record<string, string> = {
   "Loading.First": "Виджет грузится",
@@ -13,16 +14,19 @@ const messages: Record<string, string> = {
 
 export const SomeConvenientWidget: FC = () => {
   /* 
-   Если translate = undefined, то используем то, что якобы пришло изначально,
-   то есть объект messages. Если translate = i18n("en" | "fr"), то тогда
-   уже перевод начнет работу. 
+   Если translate = undefined, то используется экземпляр класса LoadingTranslator.
+   С помощью метода i18n можно воспроизвести перевод по типу i18next.
+   Если translate = i18n("en" | "fr"), то тогда
+   уже перевод начнет работу с помощью либы i18next. 
    */
   const translate: any = undefined; //i18n("fr");
+
+  const translator = new LoadingTranslator("france");
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [textLoader, setTextLoader] = useState<string>(
-    translate ? translate("Loading.First") : messages["Loading.First"]
+    translate ? translate("Loading.First") : translator.i18n("Loading.First")
   );
   const [currentTextPosition, setCurrentTextPosition] = useState(0);
 
@@ -35,7 +39,7 @@ export const SomeConvenientWidget: FC = () => {
         setTextLoader(
           translate
             ? translate(Object.keys(messages)[currentTextPosition])
-            : Object.values(messages)[currentTextPosition]
+            : translator.i18n(Object.keys(messages)[currentTextPosition])
         );
     }, 1500);
 
@@ -43,7 +47,9 @@ export const SomeConvenientWidget: FC = () => {
     loading &&
       !dataLoaded &&
       setTextLoader(
-        translate ? translate("Error.Timeout") : messages["Error.Timeout"]
+        translate
+          ? translate("Error.Timeout")
+          : translator.i18n("Error.Timeout")
       );
     setError(true);
   }, 6500);
@@ -53,7 +59,7 @@ export const SomeConvenientWidget: FC = () => {
     setTextLoader(
       translate
         ? translate("Success.LoadingFinished")
-        : messages["Success.LoadingFinished"]
+        : translator.i18n("Success.LoadingFinished")
     );
     setTimeout(() => {
       setLoading(false);
@@ -63,15 +69,12 @@ export const SomeConvenientWidget: FC = () => {
   return (
     <WidgetContainer>
       {loading ? (
-        <>
-          <LoadingContainer>
-            <Spinner loading={loading} />
-            <Text>{textLoader}</Text>
-            {!error && (
-              <StyledButton onClick={loadedData}>Загрузить данные</StyledButton>
-            )}
-          </LoadingContainer>
-        </>
+        <LoadingContainer>
+          <Spinner loading={loading} textLoader={textLoader} />
+          {!error && (
+            <StyledButton onClick={loadedData}>Загрузить данные</StyledButton>
+          )}
+        </LoadingContainer>
       ) : (
         <p>Some content</p>
       )}
@@ -84,11 +87,6 @@ const WidgetContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-`;
-
-const Text = styled.span`
-  margin-top: 10px;
-  color: #000000;
 `;
 
 const LoadingContainer = styled.div`

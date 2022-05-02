@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { SomeConvenientWidget } from "./components/some-convenient-widget";
+import { SomeConvenientWidget } from "./components/SomeConvenientWidget";
 
 import "./App.css";
 

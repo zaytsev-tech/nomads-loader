@@ -4,9 +4,10 @@ import styled from "styled-components";
 
 type SpinnerProps = {
   loading: boolean;
+  textLoader: string;
 };
 
-export const Spinner: FC<SpinnerProps> = ({ loading }) => {
+export const Spinner: FC<SpinnerProps> = ({ loading, textLoader }) => {
   return (
     <SpinnerContainer>
       <StyledClipLoader
@@ -15,13 +16,21 @@ export const Spinner: FC<SpinnerProps> = ({ loading }) => {
         loading={loading}
         size={100}
       />
+      <Text>{textLoader}</Text>
     </SpinnerContainer>
   );
 };
 
 const SpinnerContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+`;
+
+const Text = styled.span`
+  margin-top: 10px;
+  color: #000000;
 `;
 
 const StyledClipLoader = styled(ClipLoader)``;
